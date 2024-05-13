@@ -28,21 +28,17 @@
               <form id="settings-form">
                 Type of Characters:
                 <input type="radio" id="type" name="typeOfGame" value="numbers">
-                <label for="type">Numbers</label>
+                 <label for="type">Numbers</label>
                 <input type="radio" id="type" name="typeOfGame" value="letters">
                 <label for="type">Letters</label> <br>
                 <label class="range-slider"> Choose the difficulty:</label>
-                <input type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
-                <output>1</output>
+                <input title="difficulty" class="range-value" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
+                <output class="difficulty">1</output>
               </form>
           </ul>
-          <!--find the letter/number in the target box
-          choose: numbers or letters
-          choose:range of numbers
-          choose rows and columns-->
         </h4>
       </div>
-      <button class="video-game-button">प्रारंभः</button>
+      <button class="video-game-button start-game-button">प्रारंभः</button>
     </div>
 
       <div class="game-over-screen">
@@ -55,10 +51,10 @@
           <input type="radio" id="type" name="typeOfGame" value="letters">
           <label for="type">Letters</label> <br>
           <label class="range-slider"> Choose the difficulty:</label>
-          <input id="range-value" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
+          <input title="difficulty" class="range-value" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
           <output class="difficulty">1</output>
         </form>
-        <button class="video-game-button">पुनः क्रीडतु</button>
+        <button class="video-game-button replay-game-button">पुनः क्रीडतु</button>
     </div>
     <div class="main">
       <div class="main-panel">

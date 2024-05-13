@@ -1,4 +1,3 @@
-
 gsap.from(".menu-screen .main-instruction",{
     delay:0.2,
     // x:-200,
@@ -14,14 +13,40 @@ var hitBox = document.querySelector(".hit-box");
 var scoreBox = document.querySelector(".score-box");
 var gameOverScreen = document.querySelector(".game-over-screen");
 var gameOverScore = document.querySelector(".game-over-screen .current-score");
-var retplayBtn = document.querySelector(".game-over-screen button");
-var startBtn = document.querySelector(".menu-screen button");
+var retplayBtn = document.querySelector(".replay-game-button");
+var startBtn = document.querySelector(".start-game-button");
 var highScoreDisplay = document.querySelector(".game-over-screen .high-score");
-var diffcultyLevel = null;
-var diffcultyLevelOfNumbers = null;
+var rangeValue = document.querySelector(".range-value")
+var diffcultyLevel = 1;
+var diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
 var score = 0;
 
-  
+function getSanskritLettersWithMatras() {
+    const consonants = ["क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य", "र", "ल", "व", "श", "ष", "स", "ह"];
+    const matras = ["ा", "ि", "ी", "ु", "ू", "ृ", "े", "ै", "ो", "ौ"];
+
+    let combinations = [];
+
+    consonants.forEach(consonant => {
+        matras.forEach(matra => {
+        combinations.push(consonant + matra);
+        });
+    });
+
+    return combinations;
+}
+
+var allSanskritCombo = getSanskritLettersWithMatras();
+
+function initDifficulty(){
+    diffcultyLevel = parseInt(document.querySelector(".range-value").value);
+    diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
+}
+
+rangeValue.addEventListener('change',function(){
+    initDifficulty();
+});
+
 function convertToSanskrit(number) {
     const sanskritDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
     const numString = String(Math.abs(number));
@@ -39,7 +64,7 @@ function convertToSanskrit(number) {
     return sanskritString;
 }
 
-function bubbleMaker(panelContent) {
+function bubbleMaker(panelContent){
   var query = "";
   var panelWidth = (panelContent.offsetWidth);
   var panelHeight = (panelContent.offsetHeight) ;
@@ -119,8 +144,6 @@ panelContent.addEventListener("click", (dets)=>{//Event bubbling
 });
 
 startBtn.addEventListener("click", () => {
-    diffcultyLevel = parseInt(document.getElementById("range-value").value);
-    diffcultyLevelOfNumbers = diffcultyLevel*10 + 1;
     gsap.to(".menu-screen",{
         scale:0
     });
@@ -130,8 +153,6 @@ startBtn.addEventListener("click", () => {
 });
 
 retplayBtn.addEventListener("click", () => {
-    diffcultyLevel = parseInt(document.getElementById("range-value").value);
-    diffcultyLevelOfNumbers = diffcultyLevel*10 + 1;
     score = 0;
     scoreBox.innerHTML = convertToSanskrit(score);
     scoreBox.style.color = "rgb(28, 76, 223)";
