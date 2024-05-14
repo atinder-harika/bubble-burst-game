@@ -73,6 +73,7 @@ label,input{
     justify-content: center;
     flex-wrap:wrap;
     font-family: 'Arvo', serif;
+    overflow : scroll;
 }
 
 .bubble{

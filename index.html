@@ -25,10 +25,10 @@
           <ul>
             <li>Yours task is to find the number/letter in the hit box within 60 secs</li>
             <li>Choose from the following options</li>
-              <form id="settings-form">
+              <form class="settings-form-start">
                 Type of Characters:
-                <input type="radio" id="type" name="typeOfGame" value="numbers">
-                 <label for="type">Numbers</label>
+                <input type="radio" id="type" name="typeOfGame" value="numbers" checked>
+                <label for="type">Numbers</label>
                 <input type="radio" id="type" name="typeOfGame" value="letters">
                 <label for="type">Letters</label> <br>
                 <label class="range-slider"> Choose the difficulty:</label>
@@ -44,9 +44,9 @@
       <div class="game-over-screen">
         <h1>गेम ओवर</h1>
         <h3>भवतः स्कोरः&nbsp<span class="current-score">०</span></h3>
-        <form id="settings-form">
+        <form class="settings-form-restart">
           Type of Characters:
-          <input type="radio" id="type" name="typeOfGame" value="numbers">
+          <input type="radio" id="type" name="typeOfGame" value="numbers" checked>
           <label for="type">Numbers</label>
           <input type="radio" id="type" name="typeOfGame" value="letters">
           <label for="type">Letters</label> <br>

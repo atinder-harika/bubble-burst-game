@@ -16,13 +16,18 @@ var gameOverScore = document.querySelector(".game-over-screen .current-score");
 var retplayBtn = document.querySelector(".replay-game-button");
 var startBtn = document.querySelector(".start-game-button");
 var highScoreDisplay = document.querySelector(".game-over-screen .high-score");
-var rangeValue = document.querySelector(".range-value")
+var startForm = document.querySelector('.settings-form-start');
+var restartForm = document.querySelector('.settings-form-restart');
+var typeOfGame = "numbers";
 var diffcultyLevel = 1;
 var diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
+
 var score = 0;
 
 function getSanskritLettersWithMatras() {
-    const consonants = ["क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट", "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य", "र", "ल", "व", "श", "ष", "स", "ह"];
+    const consonants = ["क", "ख", "ग", "घ", "ङ", "च", "छ", "ज", "झ", "ञ", "ट",
+     "ठ", "ड", "ढ", "ण", "त", "थ", "द", "ध", "न", "प", "फ", "ब", "भ", "म", "य",
+      "र", "ल", "व", "श", "ष", "स", "ह"];
     const matras = ["ा", "ि", "ी", "ु", "ू", "ृ", "े", "ै", "ो", "ौ"];
 
     let combinations = [];
@@ -40,12 +45,16 @@ var allSanskritCombo = getSanskritLettersWithMatras();
 
 function initDifficulty(){
     diffcultyLevel = parseInt(document.querySelector(".range-value").value);
+    typeOfGame = document.querySelector('input[name="typeOfGame"]:checked').value;
     diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
+    console.log(`difficulty level is ${diffcultyLevel}`)
+    console.log(`type of game is ${typeOfGame}`)
 }
 
-rangeValue.addEventListener('change',function(){
-    initDifficulty();
-});
+startForm.addEventListener('change', initDifficulty);
+
+restartForm.addEventListener('change', initDifficulty);
+
 
 function convertToSanskrit(number) {
     const sanskritDigits = ["०", "१", "२", "३", "४", "५", "६", "७", "८", "९"];
@@ -74,9 +83,19 @@ function bubbleMaker(panelContent){
   var totalBubbles = bubblePerRow * numRow;
   
   for (let i = 0; i <= totalBubbles; i++) {
-    var randomNum = Math.floor(Math.random() * diffcultyLevelOfNumbers);
-    var sanskritNum = convertToSanskrit(randomNum)
-    query += ` <div class="bubble">${sanskritNum}</div> `;
+    if(typeOfGame === "numbers"){
+      var randomNum = Math.floor(Math.random() * diffcultyLevelOfNumbers);
+      var sanskritNum = convertToSanskrit(randomNum);
+      query += ` <div class="bubble">${sanskritNum}</div> `;
+    } 
+
+    else if(typeOfGame === "letters"){
+      var percentageOfLetters = diffcultyLevel * 10;
+      var numberOfLetters = Math.floor(allSanskritCombo.length * (percentageOfLetters / 100));
+      var randomIndex = Math.floor(Math.random() * numberOfLetters);
+      var sanskritLetter = allSanskritCombo[randomIndex];
+      query += ` <div class="bubble">${sanskritLetter}</div> `;
+    }
   }
 
   document.querySelector(".panel-content").innerHTML = query;
@@ -100,7 +119,7 @@ function gameOver() {
 }
 
 
-var time = 10;
+var time = 3;
 timerBox.innerHTML = convertToSanskrit(time);
 function timeFunction() {
     var timerInterval = setInterval(() => {
@@ -116,11 +135,20 @@ function timeFunction() {
 }
 
 function generateHit() {
-    let hitNum = Math.floor(Math.random()*diffcultyLevelOfNumbers);
-    hitBox.innerHTML = convertToSanskrit(hitNum);
+    if(typeOfGame === "numbers"){
+      let hitNum = Math.floor(Math.random() * diffcultyLevelOfNumbers);
+      hitBox.innerHTML = convertToSanskrit(hitNum);
+    } 
+    else if(typeOfGame === "letters"){
+      var percentageOfLetters = diffcultyLevel * 10;
+      var numberOfLetters = Math.floor(allSanskritCombo.length * (percentageOfLetters / 100));
+      var randomIndex = Math.floor(Math.random() * numberOfLetters);
+      var sanskritLetter = allSanskritCombo[randomIndex];
+      hitBox.innerHTML = sanskritLetter;
+    }
 }
 
-panelContent.addEventListener("click", (dets)=>{//Event bubbling
+panelContent.addEventListener("click", (dets)=>{
     if(dets.target.classList.contains('bubble')) {
         if(dets.target.innerHTML == hitBox.innerHTML){
             score += 10;
@@ -144,6 +172,7 @@ panelContent.addEventListener("click", (dets)=>{//Event bubbling
 });
 
 startBtn.addEventListener("click", () => {
+    // initDifficulty();
     gsap.to(".menu-screen",{
         scale:0
     });
@@ -153,6 +182,7 @@ startBtn.addEventListener("click", () => {
 });
 
 retplayBtn.addEventListener("click", () => {
+    // initDifficulty();
     score = 0;
     scoreBox.innerHTML = convertToSanskrit(score);
     scoreBox.style.color = "rgb(28, 76, 223)";
@@ -160,5 +190,5 @@ retplayBtn.addEventListener("click", () => {
     generateHit();
     timeFunction();
     bubbleMaker(panelContent);
-    time = 11;
+    time = 3;
 });
