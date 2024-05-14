@@ -27,12 +27,12 @@
             <li>Choose from the following options</li>
               <form class="settings-form-start">
                 Type of Characters:
-                <input type="radio" id="type" name="typeOfGame" value="numbers" checked>
-                <label for="type">Numbers</label>
-                <input type="radio" id="type" name="typeOfGame" value="letters">
-                <label for="type">Letters</label> <br>
+                <input title="great" type="radio" id="num1" name="startingType" value="numbers">
+                <label for="num1">Numbers</label>
+                <input title="great" type="radio" id="let1" name="startingType" value="letters">
+                <label for="let2">Letters</label> <br>
                 <label class="range-slider"> Choose the difficulty:</label>
-                <input title="difficulty" class="range-value" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
+                <input title="difficulty" class="range-value-start" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
                 <output class="difficulty">1</output>
               </form>
           </ul>
@@ -46,12 +46,12 @@
         <h3>भवतः स्कोरः&nbsp<span class="current-score">०</span></h3>
         <form class="settings-form-restart">
           Type of Characters:
-          <input type="radio" id="type" name="typeOfGame" value="numbers" checked>
-          <label for="type">Numbers</label>
-          <input type="radio" id="type" name="typeOfGame" value="letters">
-          <label for="type">Letters</label> <br>
+          <input title="great" type="radio" id="num2" name="restartingType" value="numbers">
+          <label for="num1">Numbers</label>
+          <input title="great" type="radio" id="let2" name="restartingType" value="letters">
+          <label for="let2">Letters</label> <br>
           <label class="range-slider"> Choose the difficulty:</label>
-          <input title="difficulty" class="range-value" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
+          <input title="difficulty" class="range-value-restart" type="range" value="1" min="1" max="10" oninput="this.nextElementSibling.value = this.value">
           <output class="difficulty">1</output>
         </form>
         <button class="video-game-button replay-game-button">पुनः क्रीडतु</button>

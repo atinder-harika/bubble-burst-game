@@ -43,12 +43,20 @@ function getSanskritLettersWithMatras() {
 
 var allSanskritCombo = getSanskritLettersWithMatras();
 
-function initDifficulty(){
-    diffcultyLevel = parseInt(document.querySelector(".range-value").value);
-    typeOfGame = document.querySelector('input[name="typeOfGame"]:checked').value;
-    diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
-    console.log(`difficulty level is ${diffcultyLevel}`)
-    console.log(`type of game is ${typeOfGame}`)
+var counter = 0;
+
+function initDifficulty() {
+    if (counter === 0) {
+        typeOfGame = document.querySelector('input[name="startingType"]:checked').value;
+        diffcultyLevel = parseInt(document.querySelector(".range-value-start").value);
+        diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
+    } else {
+        typeOfGame = document.querySelector('input[name="restartingType"]:checked').value;
+        diffcultyLevel = parseInt(document.querySelector(".range-value-restart").value);
+        diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
+    }
+    console.log(`difficulty level is ${diffcultyLevel}`);
+    console.log(`type of game is ${typeOfGame}`);
 }
 
 startForm.addEventListener('change', initDifficulty);
@@ -172,7 +180,7 @@ panelContent.addEventListener("click", (dets)=>{
 });
 
 startBtn.addEventListener("click", () => {
-    // initDifficulty();
+    counter++;
     gsap.to(".menu-screen",{
         scale:0
     });
@@ -182,7 +190,6 @@ startBtn.addEventListener("click", () => {
 });
 
 retplayBtn.addEventListener("click", () => {
-    // initDifficulty();
     score = 0;
     scoreBox.innerHTML = convertToSanskrit(score);
     scoreBox.style.color = "rgb(28, 76, 223)";
