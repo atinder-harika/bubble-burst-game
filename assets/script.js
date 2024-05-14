@@ -127,7 +127,7 @@ function gameOver() {
 }
 
 
-var time = 3;
+var time = 60;
 timerBox.innerHTML = convertToSanskrit(time);
 function timeFunction() {
     var timerInterval = setInterval(() => {
@@ -197,5 +197,5 @@ retplayBtn.addEventListener("click", () => {
     generateHit();
     timeFunction();
     bubbleMaker(panelContent);
-    time = 3;
+    time = 61;
 });
