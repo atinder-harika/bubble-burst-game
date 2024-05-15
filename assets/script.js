@@ -55,8 +55,6 @@ function initDifficulty() {
         diffcultyLevel = parseInt(document.querySelector(".range-value-restart").value);
         diffcultyLevelOfNumbers = diffcultyLevel * 10 + 1;
     }
-    console.log(`difficulty level is ${diffcultyLevel}`);
-    console.log(`type of game is ${typeOfGame}`);
 }
 
 startForm.addEventListener('change', initDifficulty);
